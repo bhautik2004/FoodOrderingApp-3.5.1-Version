@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="textcolor">#1FC57A</color>
+    <color name="white">#ffff</color>
+    <color name="black">#0A0A0A</color>
+    <color name="bottomnav">#E0DADA</color>
+    <color name="startcolor">#53E88B</color>
+    <color name="endcolor">#15BE77</color>
+    <!-- Light Mode Colors -->
+    <color name="light_background_color">#FFFFFF</color>
+    <color name="light_stroke_color">#DDDDDD</color>
+
+    <!-- Dark Mode Colors -->
+    <color name="dark_background_color">#1E1E1E</color>
+    <color name="dark_stroke_color">#555555</color>
+
+</resources>

@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">Food Ordering App</string>
+    <string name="developer">Developed By : Bhautik Thumar</string>
+    <string name="title" translatable="false">Food Ordering App</string>
+    <string name="welcome">Welcome To</string>
+    <string name="title2">Enjoy Restaurant Quality Meals \n at Home</string>
+    <string name="next">Next</string>
+    <string name="loginheading">Login To Your Account</string>
+    <string name="LoginButton">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="logo">Logo</string>
+    <string name="signup">Sign Up Here</string>
+    <string name="name">Name</string>
+    <string name="signupbtn">Create Account</string>
+    <string name="haveanaccount">Already Have An Account?</string>
+    <string name="don_t_have_account">Don\'t Have Account?</string>
+    <string name="apptitle">Explore Your Favourite Food</string>
+    <string name="norder">Completed \n order</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="popular">Popular</string>
+    <string name="viewmenu">View Menu</string>
+    <string name="addtocart">Add To Cart</string>
+    <string name="menu">Menu</string>
+    <string name="adminlogin">Admin Login</string>
+    <string name="adminloginheading">Admin Login</string>
+    <string name="pendingorders">Pending Orders</string>
+    <string name="totalearning">Total Earning</string>
+    <string name="addmenu">Add Menu</string>
+    <string name="allitemmenu">All Item Menu</string>
+    <string name="profile">Profile</string>
+    <string name="adduser">Create New User</string>
+    <string name="orderdispatch">Order Dispatch</string>
+    <string name="logout">Log Out</string>
+    <string name="additem">Add Item</string>
+    <string name="enterfoodname">Enter Food Name</string>
+    <string name="enterfoodprice">Enter Food Price</string>
+    <string name="selectimage">Select Image</string>
+    <string name="shortdesc">Short Description</string>
+    <string name="allitem">All Item</string>
+    <string name="admindashboard">Admin Dashboard</string>
+    <string name="alluserlist">All User List</string>
+    <string name="createnewuser">Create New User</string>
+    <string name="addnewuseradmin">Create New User Admin</string>
+    <string name="adminprofile">Admin Profile</string>
+    <string name="editprofile">Edit Your Profile</string>
+    <string name="dispatchorder">Dispatch Order</string>
+    <string name="allusers">All Users</string>
+</resources>

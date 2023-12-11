@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginTop="8dp"
+    android:background="@drawable/edittextshape"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/imageFood"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/burrgar"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="8dp">
+
+        <TextView
+            android:id="@+id/textFoodName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:paddingStart="16dp"
+            android:fontFamily="@font/candal"
+            android:text="foodname"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/textFoodPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+
+            android:paddingStart="16dp"
+            android:text="foodprice"
+            android:fontFamily="@font/candal"
+            android:textColor="@color/textcolor"/>
+
+        <TextView
+            android:id="@+id/textQuantity"
+            android:text="foodquantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/candal"
+            android:paddingStart="16dp"
+            android:textSize="14sp"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+</LinearLayout>
