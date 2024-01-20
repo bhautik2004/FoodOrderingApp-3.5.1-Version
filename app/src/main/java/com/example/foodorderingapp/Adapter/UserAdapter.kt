@@ -21,7 +21,7 @@ class UserAdapter(var userList : ArrayList<Userlist>):RecyclerView.Adapter<UserA
        return userList.size
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int){
        val currentItem = userList[position]
         holder.tname.text = currentItem.name
         holder.temail.text = currentItem.email

@@ -9,7 +9,7 @@ android {
     buildToolsVersion "34.0.0"
     defaultConfig {
         applicationId "com.example.foodorderingapp"
-        minSdkVersion 28
+        minSdkVersion 25
         targetSdkVersion 32
         versionCode 1
         versionName "1.0"
@@ -25,10 +25,6 @@ android {
 }
 
 dependencies {
-    //crop image
-    //api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
-    // loading image in image view
-    //implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.0.2'

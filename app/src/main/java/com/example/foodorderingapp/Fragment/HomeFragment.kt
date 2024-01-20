@@ -37,8 +37,5 @@ class HomeFragment : Fragment() {
         return view
     }
 
-    interface OnFragmentInteractionListener {
-        fun onFragmentInteraction(uri: Uri)
-    }
 }
 

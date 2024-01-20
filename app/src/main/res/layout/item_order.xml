@@ -38,7 +38,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14sp"
-
             android:paddingStart="16dp"
             android:text="foodprice"
             android:fontFamily="@font/candal"

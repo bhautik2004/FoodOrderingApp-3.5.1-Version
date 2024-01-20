@@ -5,12 +5,9 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import com.example.foodorderingapp.model.CartItem
-import com.example.foodorderingapp.model.FoodItem
-import com.example.foodorderingapp.model.Order
-import com.example.foodorderingapp.model.OrderDetails
+import com.example.foodorderingapp.model.*
 
-@Suppress("UNREACHABLE_CODE")
+//@Suppress("UNREACHABLE_CODE")
 class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
     context, DATABASE_NAME, null,
     DATABASE_VERSION
@@ -109,7 +106,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
         name: String,
         email: String,
         phone: String,
-        address:String,
+        address: String,
         date: String,
         totalamount: String
     ): Long {
@@ -120,7 +117,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
                 put(COLUMN_EMAIL, email)
                 put(COLUMN_PHONE, phone)
                 put(COLUMN_DATE, date)
-                put(COLUMN_ADDRESS,address)
+                put(COLUMN_ADDRESS, address)
                 put(COLUMN_TOTAL_AMOUNT, totalamount)
             }
             val orderId = db.insertOrThrow(TABLE_ORDER, null, values)
@@ -131,8 +128,6 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
             return -1
         }
     }
-
-
 
 
     fun signup(name: String, email: String, password: String): Long {
@@ -455,6 +450,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
         db.close()
         return rowsAffected > 0
     }
+
     fun getAllOrders(): ArrayList<Order> {
         val orderList = ArrayList<Order>()
 
@@ -469,7 +465,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
                 val email = cursor.getString(cursor.getColumnIndex(COLUMN_EMAIL))
                 val totalAmount = cursor.getString(cursor.getColumnIndex(COLUMN_TOTAL_AMOUNT))
                 val date = cursor.getString(cursor.getColumnIndex(COLUMN_DATE))
-                val order = Order(orderId, username, totalAmount, date,email)
+                val order = Order(orderId, username, totalAmount, date, email)
                 orderList.add(order)
             } while (cursor.moveToNext())
         }
@@ -479,6 +475,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
 
         return orderList
     }
+
     fun getOrderDetails(orderId: Long): OrderDetails? {
         val db = readableDatabase
         val columns = arrayOf(
@@ -526,6 +523,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
         db.close()
         return orderDetails
     }
+
     fun getOrderedItems(orderId: Long): List<CartItem> {
         val itemList = ArrayList<CartItem>()
 
@@ -547,12 +545,17 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
             do {
                 val id = cursor.getString(cursor.getColumnIndex("$TABLE_CART.$ID_COLUMN"))
                 val foodId = cursor.getString(cursor.getColumnIndex("$TABLE_CART.$FOOD_ID_COLUMN"))
-                val foodName = cursor.getString(cursor.getColumnIndex("$TABLE_FOOD.$FOOD_NAME_COLUMN"))
-                val foodPrice = cursor.getString(cursor.getColumnIndex("$TABLE_FOOD.$FOOD_PRICE_COLUMN"))
-                val foodQuantity = cursor.getInt(cursor.getColumnIndex("$TABLE_CART.$FOOD_QUANTITY"))
-                val foodImageByteArray = cursor.getBlob(cursor.getColumnIndex("$TABLE_FOOD.$FOOD_IMAGE_COLUMN"))
+                val foodName =
+                    cursor.getString(cursor.getColumnIndex("$TABLE_FOOD.$FOOD_NAME_COLUMN"))
+                val foodPrice =
+                    cursor.getString(cursor.getColumnIndex("$TABLE_FOOD.$FOOD_PRICE_COLUMN"))
+                val foodQuantity =
+                    cursor.getInt(cursor.getColumnIndex("$TABLE_CART.$FOOD_QUANTITY"))
+                val foodImageByteArray =
+                    cursor.getBlob(cursor.getColumnIndex("$TABLE_FOOD.$FOOD_IMAGE_COLUMN"))
 
-                val cartItem = CartItem(id, foodId, foodName, foodPrice, foodQuantity, foodImageByteArray, "")
+                val cartItem =
+                    CartItem(id, foodId, foodName, foodPrice, foodQuantity, foodImageByteArray, "")
                 itemList.add(cartItem)
             } while (cursor.moveToNext())
         }
@@ -562,6 +565,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
 
         return itemList
     }
+
     fun deleteOrder(orderId: Long) {
         val db = writableDatabase
 
@@ -580,5 +584,49 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
             "$ORDER_ID_COLUMN = ?",
             arrayOf(orderId.toString())
         )
+    }
+
+    fun getFoodOrderDetailsForUser(email: String): ArrayList<MyOrderDetails> {
+        val foodOrderDetailsList = ArrayList<MyOrderDetails>()
+
+        val selectQuery =
+            "SELECT " +
+                    "$TABLE_FOOD.$FOOD_NAME_COLUMN, " +
+                    "$TABLE_FOOD.$FOOD_PRICE_COLUMN, " +
+                    "$TABLE_CART.$FOOD_QUANTITY, " +
+                    "$TABLE_ORDER.$COLUMN_DATE, " +
+                    "$TABLE_FOOD.$FOOD_IMAGE_COLUMN " +
+                    "FROM $TABLE_ORDER " +
+                    "JOIN $TABLE_CART ON $TABLE_ORDER.$ORDER_ID_COLUMN = $TABLE_CART.$ORDER_ID_COLUMN " +
+                    "JOIN $TABLE_FOOD ON $TABLE_CART.$FOOD_ID_COLUMN = $TABLE_FOOD.$ID_COLUMN " +
+                    "JOIN $TABLE_USERS ON $TABLE_ORDER.$COLUMN_EMAIL = $TABLE_USERS.$COLUMN_EMAIL " +
+                    "WHERE $TABLE_USERS.$COLUMN_EMAIL = ?"
+
+        val db = this.writableDatabase
+        val cursor = db.rawQuery(selectQuery, arrayOf(email))
+
+        if (cursor.moveToFirst()) {
+            do {
+                val foodName =
+                    cursor.getString(cursor.getColumnIndex("$TABLE_FOOD.$FOOD_NAME_COLUMN"))
+                val foodPrice =
+                    cursor.getString(cursor.getColumnIndex("$TABLE_FOOD.$FOOD_PRICE_COLUMN"))
+                val foodQuantity =
+                    cursor.getInt(cursor.getColumnIndex("$TABLE_CART.$FOOD_QUANTITY"))
+                val orderDateTime =
+                    cursor.getString(cursor.getColumnIndex("$TABLE_ORDER.$COLUMN_DATE"))
+                val foodImage =
+                    cursor.getBlob(cursor.getColumnIndex("$TABLE_FOOD.$FOOD_IMAGE_COLUMN")) // Retrieve food image data
+
+                val foodOrderDetails =
+                    MyOrderDetails(foodName, foodPrice, foodQuantity, orderDateTime, foodImage)
+                foodOrderDetailsList.add(foodOrderDetails)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+
+        return foodOrderDetailsList
     }
 }
